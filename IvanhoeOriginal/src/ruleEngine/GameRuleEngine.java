@@ -133,26 +133,98 @@ public class GameRuleEngine {
 	public boolean Withdraw(String name, List<Player> players, ArrayList<String> discardPile, ArrayList<String> token, ArrayList<Player> withdrawnPlayers) {
 		boolean flag = false;	
 
+		for(int i = 0; i < players.size(); i++) {
+			if(players.get(i).getPlayerName().equals(name) && (players.get(i).myTurnToPlay == true)) {
+				for(int a = 0; a < players.get(i).handCards.size(); a++) {
+					discardPile.add(players.get(i).handCards.get(a));
+				}
+				
+				discardPile.addAll(players.get(i).playerDisplay);
+				players.get(i).handCards.removeAll(players.get(i).handCards);
+				players.get(i).playerDisplay.removeAll(players.get(i).playerDisplay);
+				withdrawnPlayers.add(players.get(i));
+				players.remove(i);
+				
+				flag = true;
+			}
+		}
 		
 		return flag;
 	}
 	
     public String winTournament(ArrayList<Player> players, String colorOfTournament, String tokenChosen) {
+String  playerName = "";
+		
+		int sizeOfPlayerTokenArray = players.get(0).playerTokens.size();
+		
+		if(players.size() == 1) {
+			if(sizeOfPlayerTokenArray == 0) {
+				if(!colorOfTournament.equals("purple")) {
+					players.get(0).playerTokens.add(colorOfTournament);
+					playerName = players.get(0).getPlayerName();
+				}
+				
+				else if(colorOfTournament.equals("purple")){
+					players.get(0).playerTokens.add(tokenChosen);
+					playerName = players.get(0).getPlayerName();
+				}
+			}
+			
+			else if(sizeOfPlayerTokenArray > 0) {
+				if(!colorOfTournament.equals("purple")) {
+					for(int i = 0; i < players.get(0).playerTokens.size(); i++) {
+						if(players.get(0).playerTokens.get(i).equals(colorOfTournament)) {
+							playerName = "You already have this token";
+							break;
+						}
+						
+						else if(!players.get(0).playerTokens.get(i).equals(colorOfTournament)){
+							playerName = players.get(0).getPlayerName();
+							players.get(0).playerTokens.add(colorOfTournament);
+							break;
+						}
+					}
+				}
+				
+				else {
+					for(int i = 0; i < players.get(0).playerTokens.size(); i++) {
+						if(players.get(0).playerTokens.get(i).equals(tokenChosen)) {
+							playerName = "You already have this token";
+							break;
+						}
+						
+						else {
+							players.get(0).playerTokens.add(tokenChosen);
+							playerName = players.get(0).getPlayerName();
+							break;
+						}
+					}
+				}
+			}
+		}
+		return playerName;
 		
 		
 		
 		
-		return null;
 	}
     
     public static void resetMyCards(ArrayList<String> discardPile, Player player) {
-		
+    	discardPile.addAll(player.handCards);
+		discardPile.addAll(player.playerDisplay);
+		player.playerDisplay.removeAll(player.playerDisplay);
+		player.handCards.removeAll(player.handCards);
 	}
     
 	public static boolean checkDeckOfCardsEmpty(List<String> deckOfCards) {
-		boolean flag = true;
+		boolean flag = false;
 
-		
+		if(deckOfCards.isEmpty()) {
+			flag = true;
+		}	
+		else {
+			flag = false;
+		}	
 		return flag;
 	}
 
