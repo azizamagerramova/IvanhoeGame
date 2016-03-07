@@ -347,6 +347,60 @@ public class GameRuleEngineTest {
 			
 		}
 		
+		@Test
+		public void testDidPlayerGetAPurpleToken() {
+			
+			String tokenColor = "purple";
+			String playerName = "Aziza";
+			
+			assertTrue(engine.didPlayerGetAPurpleToken(tokenColor, playerName));
+			assertEquals(engine.playerWhoGotPurple, playerName);
+			
+		}
+		
+		@Test
+		public void testPlayColorOrSupporter() {
+			Player newOne = new Player("Michael");
+			engine.distributeCardsToPlayers(newOne.getPlayerName(), deckOfColorAndSupporters);
+			assertFalse(engine.playColorOrSupporterCard(newOne, "color_card_red_4"));
+			newOne.myTurnToPlay = true;
+			engine.tournamentColour = "red";
+			assertTrue(engine.playColorOrSupporterCard(newOne, "color_card_red_4"));
+			assertEquals(newOne.totalCardValue, 4);
+			assertTrue(engine.playColorOrSupporterCard(newOne, "supporter_card_6"));
+			assertEquals(newOne.totalCardValue, 10);
+			assertFalse(engine.playColorOrSupporterCard(newOne, "supporter_card_6"));
+			
+		}
+		
+		@Test
+		public void testDistributeTokens() {
+			
+			boolean flag = false;
+			
+			String myToken = engine.distributeTokens(tokens);
+			for (String token : tokens) {
+				if (token.equals(myToken)) {
+					flag = false;
+				}
+				
+				else {
+					flag = true;
+				}
+			}
+			
+			assertTrue(flag);
+			
+		}
+		
+		@Test
+		public void testDistributeCardsToPlayers() {
+			String playerName = "Aziza";
+			assertEquals(8, engine.distributeCardsToPlayers(playerName, deckOfColorAndSupporters).size());
+			
+			
+		}
+		
 		
 		
 		
