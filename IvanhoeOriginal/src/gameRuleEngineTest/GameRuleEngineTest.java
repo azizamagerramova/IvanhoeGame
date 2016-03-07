@@ -121,6 +121,62 @@ public class GameRuleEngineTest {
 
 			
 		}
+		
+		//check that player has a valid colour to start the tournament he wants to start
+		@Test
+		public void colourIsValid() {
+			String colourOfTournament = "red";
+			first.handCards.add("color_card_red_3_1");
+			assertTrue(engine.colourIsValid(first, colourOfTournament));
+			first.handCards.add("color_card_blue_2_2");
+			
+			assertTrue(engine.colourIsValid(first, "blue"));
+			first.handCards.add("color_card_yellow_4_3");
+			assertTrue(engine.colourIsValid(first, "yellow"));
+			first.handCards.add("color_card_green_4_4"); 
+			first.handCards.add("supporter_card_3_1");
+			assertTrue(engine.colourIsValid(first, "purple"));
+			
+		}
+		
+		@Test
+		public void testRemoveToken() {
+			boolean check = true;
+			second.playerTokens.add("purple");
+			second.playerTokens.add("blue");
+			second.playerTokens.add("red");
+			second.playerTokens.add("green");
+			engine.removeToken(second, "purple");
+			for (String s: second.playerTokens) {
+				if (s.equals("purple")) {
+					check = false;
+				}
+			}
+			assertEquals(3, second.playerTokens.size());
+			assertTrue(check);
+			engine.removeToken(second, "green");
+			assertEquals(2, second.playerTokens.size());
+			for (String s : second.playerTokens) {
+				if (s.equals("green")) {
+					check = false;
+				}
+			}
+			assertTrue(check);
+			
+		}
+		
+		@Test
+		public void testHasToGiveUpToken () {
+			third.playerDisplay.add("supporter_card_6_2");
+			third.playerDisplay.add("color_card_green_4_4");
+			third.playerDisplay.add("color_card_red_4_2");
+			assertEquals(engine.hasToGiveUpToken(third, players), false);
+			third.myTurnToPlay = true;
+			assertEquals(engine.hasToGiveUpToken(third, players), false);
+			third.playerTokens.add("purple");
+			assertEquals(engine.hasToGiveUpToken(third, players), true);
+			
+		}
 
 	
 	

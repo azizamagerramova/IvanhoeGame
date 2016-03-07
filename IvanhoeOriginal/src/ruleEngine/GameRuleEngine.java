@@ -97,5 +97,21 @@ public class GameRuleEngine {
 		}
 		return playerToStartsGame;
 	}
+	
+	public boolean colourIsValid(Player p, String chosenColour) {
+		
+		
+		return false;
+	}
+	
+	public void removeToken(Player p, String token) {
+		
+	}
+	
+	public boolean hasToGiveUpToken(Player p, List<Player> players) {
+		
+		
+		return false;
+	}
 
 }
