@@ -258,15 +258,31 @@ String  playerName = "";
 			
 	@SuppressWarnings("unchecked")
 	public static ArrayList<String> reShuffleDiscardPileWhenDrawDeckIsEmpty(List<String> deckOfCards, ArrayList<String> discardPile) {
+		ArrayList<String> newDeckOfCards = new ArrayList<String>();
 
+		// Shuffle the discard pile cards
+		Collections.shuffle(discardPile);
+
+		// Copy what is in the discard pile to the new deck of card
+		newDeckOfCards = (ArrayList<String>) discardPile.clone();
+
+		// now empty discard pile since we copied everything to the new deck of card
+		discardPile.removeAll(discardPile);
+
+		return newDeckOfCards;
 		
 
-		return null;
 	}
 	
 	public static boolean EndOfTurn(Player player, List<Player> players) {
 		
-		return false;
+		boolean flag = true;
+		
+		for (int i =0; i< players.size();i++) {
+			if (player.totalCardValue < players.get(i).totalCardValue)
+				flag = false;
+		}
+		return flag;
 	}
 
 }
