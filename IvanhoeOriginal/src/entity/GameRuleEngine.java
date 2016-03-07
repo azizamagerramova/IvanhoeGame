@@ -1,10 +1,11 @@
-package ruleEngine;
+package entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import config.Config;
-import entity.Player;
 
 public class GameRuleEngine {
 	
@@ -28,6 +29,15 @@ public class GameRuleEngine {
 		return flag;
 	}
 	
+	public String getTournamentColour() {
+		return tournamentColour;
+	}
+	
+	/* set tournament color when game has started and user chooses color for that specific tournament */
+	public void setTournamentColour(String tColour) {
+		tournamentColour = tColour;
+	}
+	
 	/* Give a token to a player 
 	 * Takes the list of tokens and returns the random token as a string*/
 	public String distributeTokens(List<String> tokens) {
@@ -37,6 +47,7 @@ public class GameRuleEngine {
 		tokens.remove(random);
 		return playersToken;	
 	}
+	
 	
 	/* Take in array of cards and distribute eight cards to each player */
 	public ArrayList<String> distributeCardsToPlayers(String playerName, ArrayList<String> deckOfCards) {
@@ -57,24 +68,5 @@ public class GameRuleEngine {
 		return eightCardsEach;
 	}
 	
-	/*Take one card from the deck and give it to a player 
-	 * generate number at random, take card at random position 
-	 * and put it in player's array of cards. Return player's array*/
-	public String drawCard (Player p, ArrayList<String> deckOfCards) {
-		int random = (int )(Math.random() * (deckOfCards.size()-1) + 0);
-		boolean check = false;
-		String newCard = deckOfCards.get(random);
-		for (int i=0;i<p.handCards.size();i++) {
-			if (p.handCards.get(i).equals("")) {
-				p.handCards.set(i, newCard);
-				check = true;
-			}		
-		}
-		if (check == false )
-			p.handCards.add(deckOfCards.get(random));
-		
-		deckOfCards.remove(random);
-		return newCard;
-	}
 
 }
