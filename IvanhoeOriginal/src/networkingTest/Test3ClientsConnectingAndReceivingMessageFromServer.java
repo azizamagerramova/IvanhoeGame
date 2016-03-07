@@ -67,7 +67,7 @@ public class Test3ClientsConnectingAndReceivingMessageFromServer {
 		appServer.sendToOneClient(messageToSendToClient3, client3.getID());
 		appServer.resetPort();
 		
-		/*if(client1.messageReceivedFromServer().equals("")) {
+		if(client1.messageReceivedFromServer().equals("")) {
 			player1ReceivedAMessage = false;
 		}
 		
@@ -95,7 +95,7 @@ public class Test3ClientsConnectingAndReceivingMessageFromServer {
 		
 		assertTrue(player1ReceivedAMessage);
 		assertTrue(player2ReceivedAMessage);
-		assertTrue(player3ReceivedAMessage); */
+		assertTrue(player3ReceivedAMessage);
 	}
 
 }
