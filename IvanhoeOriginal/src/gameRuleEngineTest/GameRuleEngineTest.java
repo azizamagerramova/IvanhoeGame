@@ -80,44 +80,47 @@ public class GameRuleEngineTest {
 		}
 		
 		@Test
-		public void testDidPlayerGetAPurpleToken() {
-			
-			String tokenColor = "purple";
-			String playerName = "Aziza";
-			
-			assertTrue(engine.didPlayerGetAPurpleToken(tokenColor, playerName));
-			assertEquals(engine.playerWhoGotPurple, playerName);
-			
-		}
-		
-		@Test
-		public void testDistributeTokens() {
-			
-			boolean flag = false;
-			
-			String myToken = engine.distributeTokens(tokens);
-			for (String token : tokens) {
-				if (token.equals(myToken)) {
-					flag = false;
-				}
-				
-				else {
-					flag = true;
+		public void testDrawingCard() {
+			boolean check = true;
+		   String newCard = engine.drawCard(first, deckOfColorAndSupporters);
+			for (String s: deckOfColorAndSupporters) {
+				if (s.equals(newCard)) {
+					check = false;
 				}
 			}
 			
-			assertTrue(flag);
+			assertEquals(first.handCards.get(0), newCard);
+			assertTrue(check);
 			
-		}
+		 }
 		
 		@Test
-		public void testDistributeCardsToPlayers() {
-			String playerName = "Aziza";
-			assertEquals(8, engine.distributeCardsToPlayers(playerName, deckOfColorAndSupporters).size());
+		public void testplayerToStartTournament() {
+			first.tokenColour = "yellow";
+			second.tokenColour = "blue";
+			third.tokenColour = "red";
+			forth.tokenColour = "green";
+			five.tokenColour = "purple";
+
+			String playerToStart = engine.startTournamentFirst(players);
+			assertEquals(first.getPlayerName(), playerToStart);
 			
+			first.tokenColour = "purple";
+			second.tokenColour = "blue";
+			third.tokenColour = "red";
+			forth.tokenColour = "green";
+			five.tokenColour = "yellow";
+			assertEquals(second.getPlayerName(), engine.startTournamentFirst(players));
+
+			first.tokenColour = "red";
+			second.tokenColour = "blue";
+			third.tokenColour = "purple";
+			forth.tokenColour = "green";
+			five.tokenColour = "yellow";
+			assertEquals(forth.getPlayerName(), engine.startTournamentFirst(players));
+
 			
 		}
-
 
 	
 	

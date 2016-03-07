@@ -61,20 +61,14 @@ public class GameRuleEngine {
 	 * generate number at random, take card at random position 
 	 * and put it in player's array of cards. Return player's array*/
 	public String drawCard (Player p, ArrayList<String> deckOfCards) {
-		int random = (int )(Math.random() * (deckOfCards.size()-1) + 0);
-		boolean check = false;
-		String newCard = deckOfCards.get(random);
-		for (int i=0;i<p.handCards.size();i++) {
-			if (p.handCards.get(i).equals("")) {
-				p.handCards.set(i, newCard);
-				check = true;
-			}		
-		}
-		if (check == false )
-			p.handCards.add(deckOfCards.get(random));
-		
-		deckOfCards.remove(random);
-		return newCard;
+		return null;
+	}
+	
+	/* Start a tournament by playing anti-clockwise from left of the dealer
+	 * who deals the card to each player
+	 */
+	public String startTournamentFirst (ArrayList<Player> players) {
+		return null;
 	}
 
 }
