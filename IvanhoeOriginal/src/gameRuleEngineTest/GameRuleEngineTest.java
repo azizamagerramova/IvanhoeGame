@@ -21,6 +21,7 @@ public class GameRuleEngineTest {
 	
 	public String playerWhoGotPurple        = "";
 	public String tournamentColour   = "";
+	public GameRuleEngine ruleEngine;
 	
 
 	 ArrayList<String>				  			deckOfColorAndSupporters = new ArrayList<String>(Arrays.asList("color_card_purple_3_1","color_card_purple_3_2", "color_card_purple_3_3","color_card_purple_3_4",
@@ -58,6 +59,9 @@ public class GameRuleEngineTest {
 
 		@Before
 		public void setUp() throws Exception {
+			
+			ruleEngine = new GameRuleEngine();
+			
 			int numberOfCard = 0;
 			
 			
@@ -177,6 +181,233 @@ public class GameRuleEngineTest {
 			assertEquals(engine.hasToGiveUpToken(third, players), true);
 			
 		}
+		
+		@Test
+		public void testplayerWithdraw() {
+			ArrayList<String> tokens = new ArrayList<String>();
+			ArrayList<Player> withdrawnPlayers = new ArrayList<Player>();
+			List<Player> newPlayers = new ArrayList<Player>();
+			ArrayList<String> discard = new ArrayList<String>();
+			for (Player p: players) {
+				newPlayers.add(p);
+			}
+			first.playerTokens.add("red");
+			first.handCards.add("action");
+			first.handCards.add( "color");
+			first.handCards.add( "action");
+			first.handCards.add("Maiden");
+			
+			assertEquals(false, engine.Withdraw(first.getPlayerName(), newPlayers, discard, tokens, withdrawnPlayers));
+			
+			first.myTurnToPlay = true;
+			assertEquals(true, engine.Withdraw(first.getPlayerName(), newPlayers, discard, tokens, withdrawnPlayers));
+			
+			assertEquals(players.size(), 5);
+			assertEquals(withdrawnPlayers.get(0), first);
+		}
+		
+		@Test
+		public void testWinningTournament() {
+			int payersAtStart = 3;
+			players.remove(4);
+			players.remove(3);
+			players.remove(0);
+			players.remove(1);
+			assertEquals(players.get(0).playerTokens.size(), 0);
+			
+			String colorOfTheTournament = "blue";
+			assertEquals(engine.winTournament(players, colorOfTheTournament, ""), players.get(0).getPlayerName());
+			
+			colorOfTheTournament = "purple";
+			assertEquals(engine.winTournament(players, colorOfTheTournament, "blue"), "You already have this token");
+			
+			assertEquals(engine.winTournament(players, colorOfTheTournament, "yellow"), players.get(0).getPlayerName());
+			
+			players.get(0).playerTokens.clear();
+			assertEquals(engine.winTournament(players, colorOfTheTournament, "yellow"), players.get(0).getPlayerName());
+			
+		}
+		
+		@Test
+		public void resetMyCards() {
+			ArrayList<String> discard = new ArrayList<String>();
+			first.handCards = engine.distributeCardsToPlayers(first.getPlayerName(), deckOfColorAndSupporters);
+			
+			ruleEngine.resetMyCards(discard, first);
+			assertEquals(discard.size(), 8);
+			assertEquals(first.handCards.size(), 0);
+			
+			first.playerDisplay.add("color_card_red_3_4");
+			first.playerDisplay.add("color_card_green_3_4");
+			ruleEngine.resetMyCards(discard, first);
+			assertEquals(discard.size(), 10);
+			assertEquals(first.handCards.size(), 0);
+			assertEquals(first.playerDisplay.size(), 0);
+		}
+		
+		@Test
+		public void testDeckOfCardsIsNotEmpty() {
+			
+			
+			List<String> deckOfCards = new ArrayList<String>();
+			
+			deckOfCards.add("a");
+			deckOfCards.add("b");
+			
+			
+			assertFalse("List is not empty",engine.checkDeckOfCardsEmpty(deckOfCards));	
+			
+		}
+		
+		@Test
+		public void testDeckOfCardsEmpty() {
+			
+			
+			List<String> deckOfCards = new ArrayList<String>();
+			
+			deckOfCards.clear();
+			
+			assertTrue(ruleEngine.checkDeckOfCardsEmpty(deckOfCards));	
+			
+		}
+		
+		@Test
+		public void testCheckHighestValue() {
+			
+			Player current = new Player();
+			current.totalCardValue = 25;
+			first.totalCardValue = 4;
+			second.totalCardValue = 6;
+			third.totalCardValue = 8;
+			forth.totalCardValue = 10;
+			five.totalCardValue = 12;
+			
+			assertTrue(engine.checkHighestValue(current, players));
+			
+			current.totalCardValue = 5;
+			assertFalse(engine.checkHighestValue(current, players));
+			
+		}
+		
+		@Test
+		public void testPutBackCardsInDsicardPileIntoDeck() {
+			
+			ArrayList<String> deckOfCards = new ArrayList<String>();
+			ArrayList<String> discardPile = new ArrayList<String>();
+			
+			discardPile.add("A");
+			discardPile.add("B");
+			
+			
+			int a = discardPile.size();
+			
+			engine.putBackCardsInDsicardPileIntoDeck(deckOfCards, discardPile);
+			
+			assertEquals(a,deckOfCards.size());
+			assertEquals(discardPile.size(), 0);
+			discardPile.add("");
+			assertEquals(discardPile.size(), 1);
+		}
+		
+		@Test
+		public void testEndOfTurn() {
+			
+			Player player1 = new Player();
+			Player player2 = new Player();
+			Player player3 = new Player();
+			player1.totalCardValue = 4;
+			player2.totalCardValue = 2;
+			player3.totalCardValue = 10;
+			
+			
+			List<Player> players = new ArrayList<Player>(3);
+			
+			players.add(player1);
+			players.add(player2);
+			players.add(player3);
+		
+			assertEquals(ruleEngine.EndOfTurn(player3, players), true);
+			
+			
+		}
+		
+		@Test
+		public void testReShuffleDiscardPileWhenDrawDeckIsEmpty() {
+			
+			List<String> deckOfCards      = new ArrayList<String>();
+			ArrayList<String> discardPile = new ArrayList<String>();
+			
+			discardPile.add("A");
+			discardPile.add("B");
+			discardPile.add("C");
+			discardPile.add("D");
+			
+			int a = discardPile.size();
+			System.out.println(a);
+			
+			deckOfCards = engine.reShuffleDiscardPileWhenDrawDeckIsEmpty(deckOfCards, discardPile);
+			
+			assertEquals(deckOfCards.size(),a);
+			
+		}
+		
+		@Test
+		public void testDidPlayerGetAPurpleToken() {
+			
+			String tokenColor = "purple";
+			String playerName = "Aziza";
+			
+			assertTrue(engine.didPlayerGetAPurpleToken(tokenColor, playerName));
+			assertEquals(engine.playerWhoGotPurple, playerName);
+			
+		}
+		
+		@Test
+		public void testPlayColorOrSupporter() {
+			Player newOne = new Player("Michael");
+			engine.distributeCardsToPlayers(newOne.getPlayerName(), deckOfColorAndSupporters);
+			assertFalse(engine.playColorOrSupporterCard(newOne, "color_card_red_4"));
+			newOne.myTurnToPlay = true;
+			engine.tournamentColour = "red";
+			assertTrue(engine.playColorOrSupporterCard(newOne, "color_card_red_4"));
+			assertEquals(newOne.totalCardValue, 4);
+			assertTrue(engine.playColorOrSupporterCard(newOne, "supporter_card_6"));
+			assertEquals(newOne.totalCardValue, 10);
+			assertFalse(engine.playColorOrSupporterCard(newOne, "supporter_card_6"));
+			
+		}
+		
+		@Test
+		public void testDistributeTokens() {
+			
+			boolean flag = false;
+			
+			String myToken = engine.distributeTokens(tokens);
+			for (String token : tokens) {
+				if (token.equals(myToken)) {
+					flag = false;
+				}
+				
+				else {
+					flag = true;
+				}
+			}
+			
+			assertTrue(flag);
+			
+		}
+		
+		@Test
+		public void testDistributeCardsToPlayers() {
+			String playerName = "Aziza";
+			assertEquals(8, engine.distributeCardsToPlayers(playerName, deckOfColorAndSupporters).size());
+			
+			
+		}
+		
+		
+		
+		
 
 	
 	

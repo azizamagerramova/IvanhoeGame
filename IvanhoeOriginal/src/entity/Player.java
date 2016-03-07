@@ -10,14 +10,16 @@ public class Player {
 	
 	public 	String 					tokenColour;
 	private String 					playerName;
-	public boolean myTurnToPlay;
 	public  int    					totalCardValue;
 	public  ArrayList<String> 		playerTokens;
 	public 	ArrayList<String> 		handCards;
 	public 	ArrayList<String>       playerDisplay;
+	public boolean 					myTurnToPlay;
+	public boolean 					IgotANewCard;
 	
 	public Player() {
-		myTurnToPlay = false;
+		IgotANewCard 				= false;
+		myTurnToPlay 				= false;
 		this.playerName  			= "computer"; 
 		totalCardValue   			= 0;
 		playerTokens     			= new ArrayList<String>(Config.numberOfTokens);
@@ -46,6 +48,13 @@ public class Player {
 		return tokenColour;
 	}
 	
+	public void resetTotalCardValue() {
+		totalCardValue = 0;
+	}
+	
+	public void resetDisplay() {
+		playerDisplay = new ArrayList<String>();
+	}
+	
 	
 }
-

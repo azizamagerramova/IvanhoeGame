@@ -38,7 +38,7 @@ public class Test4ClientsConnectingAndREceivingMessageFromServer {
 	@Test
 	public void  test4ClientsAndReceiveMessageFromServer() throws IOException, ClassNotFoundException {
 		
-		int     PORT    				  = 3008;
+		int     PORT    				  = 3004;
 		String  host    				  = "127.0.0.1";
 		String  messageToSendToClient1    = "Welcome client1";
 		String  messageToSendToClient2    = "Welcome client2";
@@ -70,6 +70,41 @@ public class Test4ClientsConnectingAndREceivingMessageFromServer {
 		ClientApp client4 = new ClientApp(host, PORT, "chuboy");
 		appServer.sendToOneClient(messageToSendToClient4, client4.getID());
 		appServer.resetPort();
+		
+		if(client1.messageReceivedFromServer().equals("")) {
+			player1ReceivedAMessage = false;
+		}
+		
+		else {
+			player1ReceivedAMessage = true;
+		}
+		
+		
+		if(client2.messageReceivedFromServer().equals("")) {
+			player2ReceivedAMessage = false;
+		}
+		
+		else {
+			player2ReceivedAMessage = true;
+		}
+		
+		
+		if(client3.messageReceivedFromServer().equals("")) {
+			player3ReceivedAMessage = false;
+		}
+		
+		else {
+			player3ReceivedAMessage = true;
+		}
+		
+		
+		if(client4.messageReceivedFromServer().equals("")) {
+			player4ReceivedAMessage = false;
+		}
+		
+		else {
+			player4ReceivedAMessage = true;
+		}
 		
 		assertTrue(player1ReceivedAMessage);
 		assertTrue(player2ReceivedAMessage);

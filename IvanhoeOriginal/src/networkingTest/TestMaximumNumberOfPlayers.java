@@ -35,7 +35,7 @@ public class TestMaximumNumberOfPlayers {
 	
 	@Test
 	public void testMaxNumberOfPlayers() {
-		int    PORT    = 3001;
+		int    PORT    = 3005;
 		String host    = "127.0.0.1";
 		
 		ServerApp appServer = new ServerApp(PORT);

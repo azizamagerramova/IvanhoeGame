@@ -39,7 +39,7 @@ public class Test3ClientsConnectingAndReceivingMessageFromServer {
 	@Test
 	public void  test3ClientsAndReceiveMessageFromServer() throws IOException {
 		
-		int     PORT    				  = 4000;
+		int     PORT    				  = 3002;
 		String  host    				  = "127.0.0.1";
 		String  messageToSendToClient1    = "Welcome client1";
 		String  messageToSendToClient2    = "Welcome client2";
