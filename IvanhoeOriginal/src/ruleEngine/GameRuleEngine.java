@@ -129,5 +129,31 @@ public class GameRuleEngine {
 		
 		return false;
 	}
+	
+	public boolean Withdraw(String name, List<Player> players, ArrayList<String> discardPile, ArrayList<String> token, ArrayList<Player> withdrawnPlayers) {
+		boolean flag = false;	
+
+		
+		return flag;
+	}
+	
+    public String winTournament(ArrayList<Player> players, String colorOfTournament, String tokenChosen) {
+		
+		
+		
+		
+		return null;
+	}
+    
+    public static void resetMyCards(ArrayList<String> discardPile, Player player) {
+		
+	}
+    
+	public static boolean checkDeckOfCardsEmpty(List<String> deckOfCards) {
+		boolean flag = true;
+
+		
+		return flag;
+	}
 
 }

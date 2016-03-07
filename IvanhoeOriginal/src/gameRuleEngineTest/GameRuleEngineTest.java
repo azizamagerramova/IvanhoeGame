@@ -177,6 +177,97 @@ public class GameRuleEngineTest {
 			assertEquals(engine.hasToGiveUpToken(third, players), true);
 			
 		}
+		
+		@Test
+		public void testplayerWithdraw() {
+			ArrayList<String> tokens = new ArrayList<String>();
+			ArrayList<Player> withdrawnPlayers = new ArrayList<Player>();
+			List<Player> newPlayers = new ArrayList<Player>();
+			ArrayList<String> discard = new ArrayList<String>();
+			for (Player p: players) {
+				newPlayers.add(p);
+			}
+			first.playerTokens.add("red");
+			first.handCards.add("action");
+			first.handCards.add( "color");
+			first.handCards.add( "action");
+			first.handCards.add("Maiden");
+			
+			assertEquals(false, engine.Withdraw(first.getPlayerName(), newPlayers, discard, tokens, withdrawnPlayers));
+			
+			first.myTurnToPlay = true;
+			assertEquals(true, engine.Withdraw(first.getPlayerName(), newPlayers, discard, tokens, withdrawnPlayers));
+			
+			assertEquals(players.size(), 5);
+			assertEquals(withdrawnPlayers.get(0), first);
+		}
+		
+		@Test
+		public void testWinningTournament() {
+			int payersAtStart = 3;
+			players.remove(4);
+			players.remove(3);
+			players.remove(0);
+			players.remove(1);
+			assertEquals(players.get(0).playerTokens.size(), 0);
+			
+			String colorOfTheTournament = "blue";
+			assertEquals(engine.winTournament(players, colorOfTheTournament, ""), players.get(0).getPlayerName());
+			
+			colorOfTheTournament = "purple";
+			assertEquals(engine.winTournament(players, colorOfTheTournament, "blue"), "You already have this token");
+			
+			assertEquals(engine.winTournament(players, colorOfTheTournament, "yellow"), players.get(0).getPlayerName());
+			
+			players.get(0).playerTokens.clear();
+			assertEquals(engine.winTournament(players, colorOfTheTournament, "yellow"), players.get(0).getPlayerName());
+			
+		}
+		
+		@Test
+		public void resetMyCards() {
+			ArrayList<String> discard = new ArrayList<String>();
+			first.handCards = engine.distributeCardsToPlayers(first.getPlayerName(), deckOfColorAndSupporters);
+			
+			GameRuleEngine.resetMyCards(discard, first);
+			assertEquals(discard.size(), 8);
+			assertEquals(first.handCards.size(), 0);
+			
+			first.playerDisplay.add("color_card_red_3_4");
+			first.playerDisplay.add("color_card_green_3_4");
+			GameRuleEngine.resetMyCards(discard, first);
+			assertEquals(discard.size(), 10);
+			assertEquals(first.handCards.size(), 0);
+			assertEquals(first.playerDisplay.size(), 0);
+		}
+		
+		@Test
+		public void testDeckOfCardsIsNotEmpty() {
+			
+			
+			List<String> deckOfCards = new ArrayList<String>();
+			
+			deckOfCards.add("a");
+			deckOfCards.add("b");
+			
+			
+			assertFalse("List is not empty",engine.checkDeckOfCardsEmpty(deckOfCards));	
+			
+		}
+		
+		@Test
+		public void testDeckOfCardsEmpty() {
+			
+			
+			List<String> deckOfCards = new ArrayList<String>();
+			
+			deckOfCards.clear();
+			
+			assertTrue(GameRuleEngine.checkDeckOfCardsEmpty(deckOfCards));	
+			
+		}
+		
+		
 
 	
 	
