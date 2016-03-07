@@ -232,7 +232,13 @@ String  playerName = "";
 	
 	public boolean checkHighestValue(Player current, ArrayList<Player> players) {
 		
-		return false;
+		for (Player p: players) {
+			if ((current.totalCardValue <= p.totalCardValue)) {
+				if (!current.getPlayerName().equals(p.getPlayerName()))
+					return false;
+			}
+		}
+		return true;
 		
 	}
 	
@@ -240,7 +246,11 @@ String  playerName = "";
 	/* checks if a player won a tournament, 
 	 * gives him token of tournament color or lets him to choose token  */
 	public void putBackCardsInDsicardPileIntoDeck(ArrayList<String> deckOfCards, ArrayList<String> discardPile) {
-		
+		for(String s: discardPile) {
+			if (!s.equals(""))
+				deckOfCards.add(s);
+		}
+		discardPile.removeAll(discardPile);
 	}
 
 }
