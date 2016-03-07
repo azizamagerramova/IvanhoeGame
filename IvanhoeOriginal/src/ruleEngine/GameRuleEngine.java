@@ -227,5 +227,20 @@ String  playerName = "";
 		}	
 		return flag;
 	}
+	
+	
+	
+	public boolean checkHighestValue(Player current, ArrayList<Player> players) {
+		
+		return false;
+		
+	}
+	
+	/* takes list of players and color of tournament,  */
+	/* checks if a player won a tournament, 
+	 * gives him token of tournament color or lets him to choose token  */
+	public void putBackCardsInDsicardPileIntoDeck(ArrayList<String> deckOfCards, ArrayList<String> discardPile) {
+		
+	}
 
 }

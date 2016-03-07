@@ -267,6 +267,44 @@ public class GameRuleEngineTest {
 			
 		}
 		
+		@Test
+		public void testCheckHighestValue() {
+			
+			Player current = new Player();
+			current.totalCardValue = 25;
+			first.totalCardValue = 4;
+			second.totalCardValue = 6;
+			third.totalCardValue = 8;
+			forth.totalCardValue = 10;
+			five.totalCardValue = 12;
+			
+			assertTrue(engine.checkHighestValue(current, players));
+			
+			current.totalCardValue = 5;
+			assertFalse(engine.checkHighestValue(current, players));
+			
+		}
+		
+		@Test
+		public void testPutBackCardsInDsicardPileIntoDeck() {
+			
+			ArrayList<String> deckOfCards = new ArrayList<String>();
+			ArrayList<String> discardPile = new ArrayList<String>();
+			
+			discardPile.add("A");
+			discardPile.add("B");
+			
+			
+			int a = discardPile.size();
+			
+			engine.putBackCardsInDsicardPileIntoDeck(deckOfCards, discardPile);
+			
+			assertEquals(a,deckOfCards.size());
+			assertEquals(discardPile.size(), 0);
+			discardPile.add("");
+			assertEquals(discardPile.size(), 1);
+		}
+		
 		
 
 	
