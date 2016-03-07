@@ -19,23 +19,42 @@ public class GameRuleEngine {
 	
 	/* Check if the player got back a purple token */
 	public boolean didPlayerGetAPurpleToken(String tokenColor, String playerName) {
+		boolean flag = false;
 		
-		return false;
+		if (tokenColor.equals("purple")) {
+				flag = true;
+				playerWhoGotPurple = playerName;
+		}
+		
+		return flag;
 	}
 	
 	/* Give a token to a player 
 	 * Takes the list of tokens and returns the random token as a string*/
 	public String distributeTokens(List<String> tokens) {
-		
-		
-		return null;	
+		int random = (int) Math.floor(tokens.size() * Math.random());
+		String playersToken = tokens.get(random);
+		tokens.remove(random);
+		return playersToken;	
 	}
 	
 	/* Take in array of cards and distribute eight cards to each player */
 	public ArrayList<String> distributeCardsToPlayers(String playerName, ArrayList<String> deckOfCards) {
+		ArrayList<String> eightCardsEach = new ArrayList<String>();
+		String getTheRandomString = "";
 		
+		/* Shuffle deck of cards first */
+		int shuffleDeckOfCards;
 		
-		return null;
+		for(int i = 0; i < Config.numCardsToDistribute; i++) {
+			shuffleDeckOfCards = (int) Math.floor(deckOfCards.size() * Math.random());
+
+			getTheRandomString = deckOfCards.get(shuffleDeckOfCards);
+			eightCardsEach.add(getTheRandomString);
+			deckOfCards.remove(shuffleDeckOfCards);
+		}
+		
+		return eightCardsEach;
 	}
 	
 	/*Take one card from the deck and give it to a player 
@@ -268,6 +287,52 @@ String  playerName = "";
 
 	public boolean playColorOrSupporterCard(Player player, String card) {
 		
+		int score = 0;
+		String[] splitIt = card.split("_");
+		boolean flag1 = true;
+
+		if (player.myTurnToPlay) {
+			if (splitIt[0].equals("supporter"))  {
+				if (splitIt[2].equals("6")) {
+					for (int i = 0; i< player.playerDisplay.size();i++) {
+						if((player.playerDisplay.get(i).startsWith("supporter_card_6"))) {
+							System.out.println("You are trying to play another supporter card");
+							return false;
+					}
+				}
+			}
+				
+				if (flag1) {
+					score = Integer.parseInt(splitIt[2]);
+					player.playerDisplay.add(card);
+					for (int i=0;i<player.handCards.size();i++) {
+						if (card.equals(player.handCards.get(i))) {
+							player.handCards.set(i, "");
+						}
+					}
+					if (!tournamentColour.equalsIgnoreCase("green")) {
+						player.totalCardValue += score;
+					}
+					else 
+						player.totalCardValue +=1;
+					return true;
+				}
+			}
+
+			else if (splitIt[0].equals("color") && tournamentColour.equalsIgnoreCase(splitIt[2])) {
+			
+				score = Integer.parseInt(splitIt[3]);
+				player.playerDisplay.add(card);
+				for (int i=0;i<player.handCards.size();i++) {
+					if (card.equals(player.handCards.get(i))) {
+						player.handCards.set(i, "");
+					}
+				}
+				
+				player.totalCardValue += score;
+				return true;
+			}
+		}
 		
 		return false;
 	}
