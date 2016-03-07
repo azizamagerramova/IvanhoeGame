@@ -31,6 +31,10 @@ public class ServerApp {
 		
 	}
 	
+	public synchronized void handle(int ID, String input) {
+		
+	}
+	
 	public void sendToOneClient(String msg, int ID) {
 		
 	}
