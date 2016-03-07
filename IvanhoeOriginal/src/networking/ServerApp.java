@@ -18,6 +18,7 @@ public class ServerApp implements Runnable {
 	
 	
 	public boolean 							  connected = false;
+	public String 							  maxNumberOfPlayersReached = "";
 	
 	public ServerApp(int port) {
 		try {
@@ -95,6 +96,7 @@ public class ServerApp implements Runnable {
 			socket.close();
 			System.out.println("Client Tried to connect" + socket );
 			System.out.println("Client refused: maximum number of player reached");
+			maxNumberOfPlayersReached = "Client refused: maximum number of player reached";
 		}
 	}
 	
