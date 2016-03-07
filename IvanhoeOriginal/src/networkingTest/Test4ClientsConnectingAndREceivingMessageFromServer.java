@@ -75,6 +75,11 @@ public class Test4ClientsConnectingAndREceivingMessageFromServer {
 		assertTrue(player2ReceivedAMessage);
 		assertTrue(player3ReceivedAMessage);
 		assertTrue(player4ReceivedAMessage);
+		
+		appServer.remove(client1.getID());
+		appServer.remove(client2.getID());
+		appServer.remove(client3.getID());
+		appServer.remove(client4.getID());
 	}
 
 }
