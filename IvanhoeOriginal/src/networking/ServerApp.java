@@ -2,6 +2,7 @@ package networking;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.SocketException;
 import java.util.HashMap;
 
 public class ServerApp {
@@ -20,5 +21,17 @@ public class ServerApp {
 		} catch (IOException ioe) {
 			System.out.println(ioe.getMessage());
 		}
+	}
+	
+	public void resetPort() {
+		
+	}
+	
+	public void remove(int ID) {
+		
+	}
+	
+	public void sendToOneClient(String msg, int ID) {
+		
 	}
 }

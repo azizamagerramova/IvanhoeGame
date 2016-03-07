@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 public class ClientApp {
 	
 	private Socket socket = null;
+	private int    ID     = 0;
 	
 	public ClientApp(String serverName, int serverPort, String pName) {
 		
@@ -22,5 +23,14 @@ public class ClientApp {
 			System.out.println(": Unexpected exception");
 			System.out.println(ioe.getMessage());  
 		}
+	}
+	
+	public String messageReceivedFromServer() {
+		
+		return "";
+	}
+	
+	public int getID() {
+		return ID;
 	}
 }
