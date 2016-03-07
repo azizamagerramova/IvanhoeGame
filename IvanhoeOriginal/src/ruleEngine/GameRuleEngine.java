@@ -1,6 +1,7 @@
 package ruleEngine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import config.Config;
@@ -251,6 +252,21 @@ String  playerName = "";
 				deckOfCards.add(s);
 		}
 		discardPile.removeAll(discardPile);
+	}
+	
+	
+			
+	@SuppressWarnings("unchecked")
+	public static ArrayList<String> reShuffleDiscardPileWhenDrawDeckIsEmpty(List<String> deckOfCards, ArrayList<String> discardPile) {
+
+		
+
+		return null;
+	}
+	
+	public static boolean EndOfTurn(Player player, List<Player> players) {
+		
+		return false;
 	}
 
 }

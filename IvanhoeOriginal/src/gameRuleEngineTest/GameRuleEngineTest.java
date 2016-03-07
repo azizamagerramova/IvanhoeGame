@@ -305,6 +305,50 @@ public class GameRuleEngineTest {
 			assertEquals(discardPile.size(), 1);
 		}
 		
+		@Test
+		public void testEndOfTurn() {
+			
+			Player player1 = new Player();
+			Player player2 = new Player();
+			Player player3 = new Player();
+			player1.totalCardValue = 4;
+			player2.totalCardValue = 2;
+			player3.totalCardValue = 10;
+			
+			
+			List<Player> players = new ArrayList<Player>(3);
+			
+			players.add(player1);
+			players.add(player2);
+			players.add(player3);
+		
+			assertEquals(GameRuleEngine.EndOfTurn(player3, players), true);
+			
+			
+		}
+		
+		@Test
+		public void testReShuffleDiscardPileWhenDrawDeckIsEmpty() {
+			
+			List<String> deckOfCards      = new ArrayList<String>();
+			ArrayList<String> discardPile = new ArrayList<String>();
+			
+			discardPile.add("A");
+			discardPile.add("B");
+			discardPile.add("C");
+			discardPile.add("D");
+			
+			int a = discardPile.size();
+			System.out.println(a);
+			
+			deckOfCards = engine.reShuffleDiscardPileWhenDrawDeckIsEmpty(deckOfCards, discardPile);
+			
+			assertEquals(deckOfCards.size(),a);
+			
+		}
+		
+		
+		
 		
 
 	
