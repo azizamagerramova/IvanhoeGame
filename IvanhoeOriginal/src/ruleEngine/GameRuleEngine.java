@@ -97,5 +97,37 @@ public class GameRuleEngine {
 		}
 		return playerToStartsGame;
 	}
+	
+	public boolean colourIsValid(Player p, String chosenColour) {
+		for (String s: p.handCards) {
+			String[] splitIt = s.split("_");
+			if ((splitIt[0].equals("color") && (splitIt[2].equals(chosenColour))) || splitIt[0].equals("supporter")) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public void removeToken(Player p, String token) {
+		for (int i =0; i<p.playerTokens.size();i++) {
+			if (token.equalsIgnoreCase(p.playerTokens.get(i))) {
+				p.playerTokens.remove(i);
+			}
+		}
+	}
+	
+	public boolean hasToGiveUpToken(Player p, List<Player> players) {
+		for(int b = 0; b < p.playerDisplay.size(); b++) {
+			if(p.playerDisplay.get(b).startsWith("supporter_card_6") && p.myTurnToPlay) {
+				if(p.playerTokens.size() >= 1) {
+					return true;
+			}
+		  }
+		}
+		
+		
+		return false;
+	}
 
 }
