@@ -1,10 +1,7 @@
 package networking;
 
-<<<<<<< HEAD
-public class ClientThread {
 
-}
-=======
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -58,4 +55,3 @@ public class ClientThread extends Thread{
 	}	
 
 }
->>>>>>> de8d1f9e8f8e3d7ed75589ef4c783a51535406de
