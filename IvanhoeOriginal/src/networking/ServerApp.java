@@ -23,6 +23,10 @@ public class ServerApp {
 		}
 	}
 	
+	public synchronized void handle(String input, int ID) {
+		
+	}
+	
 	public void resetPort() {
 		
 	}
