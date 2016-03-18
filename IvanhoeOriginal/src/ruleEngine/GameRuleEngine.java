@@ -211,12 +211,12 @@ public class GameRuleEngine {
 			else if(sizeOfPlayerTokenArray > 0) {
 				if(!colorOfTournament.equals("purple")) {
 					for(int i = 0; i < players.get(0).playerTokens.size(); i++) {
-						if(players.get(0).playerTokens.get(i).equals(colorOfTournament)) {
+						if(players.get(0).playerTokens.get(i).equalsIgnoreCase(colorOfTournament)) {
 							playerName = "You already have this token";
 							break;
 						}
 						
-						else if(!players.get(0).playerTokens.get(i).equals(colorOfTournament)){
+						else if(!players.get(0).playerTokens.get(i).equalsIgnoreCase(colorOfTournament)){
 							playerName = players.get(0).getPlayerName();
 							players.get(0).playerTokens.add(colorOfTournament);
 							break;
@@ -226,7 +226,7 @@ public class GameRuleEngine {
 				
 				else {
 					for(int i = 0; i < players.get(0).playerTokens.size(); i++) {
-						if(players.get(0).playerTokens.get(i).equals(tokenChosen)) {
+						if(players.get(0).playerTokens.get(i).equalsIgnoreCase(tokenChosen)) {
 							playerName = "You already have this token";
 							break;
 						}

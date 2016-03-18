@@ -23,6 +23,7 @@ public class StartUp extends JPanel{
 		setLayout(new BorderLayout());
 		//BACKGROUND START GAME
 		background = new JLabel(new ImageIcon("./img/ivanhoeBackground.png"));
+		//background = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("resources/ivanhoeBackground.png")));
 		add(background);
 		background.setLayout(new FlowLayout());
 		setVisible(true);

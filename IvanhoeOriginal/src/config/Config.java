@@ -7,7 +7,7 @@ public class Config {
 	public static int FOUR_PLAYERS  = 4;
 	public static int FIVE_PLAYERS  = 5;
 	
-	public static int NUMBER_OF_PLAYERS_SPECIFIED = 4;
+	public static int NUMBER_OF_PLAYERS_SPECIFIED = 2;
 	public static int numberOfCardsForEachPlayer = 9;
 	public static int numberOfTokens = 5;
 	public static int numCardsToDistribute = 8;

@@ -440,12 +440,12 @@ public class ServerApp implements Runnable {
 
 			String[] splitIt = input.split(" ");
 			String tokenColourChosen = splitIt[10];
+			
+			/* call rule engine and pass in that this into it */
+			ruleEngine.winTournament(players, ruleEngine.getTournamentColour(), tokenColourChosen);
 
 			sendToOneClient("Server is done adding token to my list of tokens " + tokenColourChosen + " " + players.get(0).getPlayerName(), playerWhoWonCurrentTournamentKey);
 			sendMessageToAllClients("make token visible to other players " + tokenColourChosen + " " + players.get(0).getPlayerName());
-
-			/* call rule engine and pass in that this into it */
-			ruleEngine.winTournament(players, ruleEngine.getTournamentColour(), tokenColourChosen);
 
 		}
 
@@ -605,7 +605,15 @@ public class ServerApp implements Runnable {
 				players.get(i).resetTotalCardValue();
 				players.get(i).resetDisplay();
 			}
-
+			
+			System.out.println("Tokens of the winner: ");
+			for (Player p: players) {
+				if (p.getPlayerName().equals(playerWhoWonTheCurrentTournament)) {
+					for (String s : p.playerTokens) {
+						System.out.println(s);
+					}
+				}
+			}
 			playerWhoWonTheCurrentTournament = "";
 			playerWhoWonCurrentTournamentKey = 0;	
 		}

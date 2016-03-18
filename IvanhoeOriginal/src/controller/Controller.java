@@ -2270,6 +2270,12 @@ public class Controller extends JFrame {
 						view.player1token4.setIcon(yellowToken);
 						view.player1token4.setVisible(true);
 					}
+					
+					else if(tokenColourObtained.equals("purple")) {
+						ImageIcon yellowToken = new ImageIcon("./img/" + tokenColourObtained +"_token.png");
+						view.player1token4.setIcon(yellowToken);
+						view.player1token4.setVisible(true);
+					}
 				}
 
 				else if(keyValue.equals("player2")) {
@@ -2295,6 +2301,12 @@ public class Controller extends JFrame {
 						ImageIcon yellowToken = new ImageIcon("./img/" + tokenColourObtained +"_token.png");
 						view.player2token4.setIcon(yellowToken);
 						view.player2token4.setVisible(true);
+					}
+					
+					else if(tokenColourObtained.equals("purple")) {
+						ImageIcon yellowToken = new ImageIcon("./img/" + tokenColourObtained +"_token.png");
+						view.player1token4.setIcon(yellowToken);
+						view.player1token4.setVisible(true);
 					}
 				}
 
@@ -2322,6 +2334,12 @@ public class Controller extends JFrame {
 						view.player3token4.setIcon(yellowToken);
 						view.player3token4.setVisible(true);
 					}
+					
+					else if(tokenColourObtained.equals("purple")) {
+						ImageIcon yellowToken = new ImageIcon("./img/" + tokenColourObtained +"_token.png");
+						view.player1token4.setIcon(yellowToken);
+						view.player1token4.setVisible(true);
+					}
 				}
 
 				else if(keyValue.equals("player4")) {
@@ -2347,6 +2365,12 @@ public class Controller extends JFrame {
 						ImageIcon yellowToken = new ImageIcon("./img/" + tokenColourObtained +"_token.png");
 						view.player4token4.setIcon(yellowToken);
 						view.player4token4.setVisible(true);
+					}
+					
+					else if(tokenColourObtained.equals("purple")) {
+						ImageIcon yellowToken = new ImageIcon("./img/" + tokenColourObtained +"_token.png");
+						view.player1token4.setIcon(yellowToken);
+						view.player1token4.setVisible(true);
 					}
 				}
 
@@ -2374,6 +2398,12 @@ public class Controller extends JFrame {
 						view.player5token4.setIcon(yellowToken);
 						view.player5token4.setVisible(true);
 					}
+					
+					else if(tokenColourObtained.equals("purple")) {
+						ImageIcon yellowToken = new ImageIcon("./img/" + tokenColourObtained +"_token.png");
+						view.player1token4.setIcon(yellowToken);
+						view.player1token4.setVisible(true);
+					}
 				}
 			}
 		}
@@ -2386,7 +2416,7 @@ public class Controller extends JFrame {
 	}
 	public String chosenTokenColour() {
 
-		String[] choices = {"RED", "GREEN", "YELLOW", "BLUE"};
+		String[] choices = {"PURPLE", "RED", "GREEN", "YELLOW", "BLUE"};
 		String input     = (String) JOptionPane.showInputDialog(null, "Select a token as the winner of this PURPLE tournament", "PICK A TOKEN ALERT!!!", JOptionPane.QUESTION_MESSAGE, null, choices, choices[1]);
 
 		return input;
